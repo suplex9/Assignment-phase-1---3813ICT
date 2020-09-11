@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { FormGroupName } from '@angular/forms';
+const backendURL = "localhost:3000/";
 
 @Injectable({
   providedIn: 'root'
@@ -63,32 +64,32 @@ export class UsersService {
       'groupName': groupName,
       'channelName': channelName
     };
-    return this.http.post('api/channel/create', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/channel/create', JSON.stringify(body), this.genHeadersJSON());
   }
 
   // remove a channel
   removeChannel(username:string, groupName:string, channelName:string) {
-    return this.http.delete('api/channel/remove/' + username + '.' + groupName + '.' + channelName);
+    return this.http.delete(backendURL+'api/channel/remove/' + username + '.' + groupName + '.' + channelName);
   }
 
   // get all the channels
   getChannels(groupName:string) {
-    return this.http.get('api/' + groupName + '/channels');
+    return this.http.get(backendURL+'api/' + groupName + '/channels');
   }
 
   // get the users in a group
   getGroupUsers(groupName:string) {
-    return this.http.get('api/' + groupName + '/users');
+    return this.http.get(backendURL+'api/' + groupName + '/users');
   }
 
   // get the data on all users
   getDataAllUsers() {
-    return this.http.get('api/users/all');
+    return this.http.get(backendURL+'api/users/all');
   }
 
   // remove a user in a group
   removeUserInGroup(username:string, groupName:string) {
-    return this.http.delete('api/remove/' + groupName + '.' + username);
+    return this.http.delete(backendURL+'api/remove/' + groupName + '.' + username);
   }
 
   // add a user to a group
@@ -97,7 +98,7 @@ export class UsersService {
       "username": username,
       "groupName": groupName
     }
-    return this.http.post('api/groups/add', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/groups/add', JSON.stringify(body), this.genHeadersJSON());
   }
 
   // add a user to a channel
@@ -107,17 +108,17 @@ export class UsersService {
       "groupName": groupName,
       "channelName": channelName
     };
-    return this.http.post('api/group/channel/add', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/group/channel/add', JSON.stringify(body), this.genHeadersJSON());
   } 
 
   // remove a user from a channel
   removeUserFromChannel(username:string, groupName:string, channelName:string) {
-    return this.http.delete('api/removeUserFromChannel/' + groupName + '.' + channelName + '.' + username);
+    return this.http.delete(backendURL+'api/removeUserFromChannel/' + groupName + '.' + channelName + '.' + username);
   }
 
   // remove a user from the system
   removeUserFromSystem(username:string) {
-    return this.http.delete('api/removeUserFromSystem/' + username);
+    return this.http.delete(backendURL+'api/removeUserFromSystem/' + username);
   }
 
   // make user a group admin
@@ -125,7 +126,7 @@ export class UsersService {
     let body = {
       "username": username
     }
-    return this.http.post('api/makeUserGroupAdmin', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/makeUserGroupAdmin', JSON.stringify(body), this.genHeadersJSON());
   }
 
   // make user a super admin
@@ -133,12 +134,12 @@ export class UsersService {
     let body = {
       "username": username
     }
-    return this.http.post('api/makeUserSuperAdmin', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/makeUserSuperAdmin', JSON.stringify(body), this.genHeadersJSON());
   }
 
   // get the messages of a channel
   getChannelMessages(groupName:string, channelName:string) {
-    return this.http.get('api/channel/messages', {
+    return this.http.get(backendURL+'api/channel/messages', {
       params: {
       "groupName": groupName,
       "channelName": channelName
@@ -150,7 +151,7 @@ export class UsersService {
   updateUser(username, userData) {
     console.log('updating user data');
     let body = userData;
-    return this.http.post('api/user/update', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/user/update', JSON.stringify(body), this.genHeadersJSON());
   }
 
   // validate a user's credentials
@@ -159,7 +160,7 @@ export class UsersService {
       "username": username,
       "password": password
     }
-    return this.http.post('api/user/validate', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/user/validate', JSON.stringify(body), this.genHeadersJSON());
   }
 
   // create a new user
@@ -169,7 +170,7 @@ export class UsersService {
       "password": password,
       "email": email
     }
-    return this.http.post('api/user/create', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/user/create', JSON.stringify(body), this.genHeadersJSON());
   }
 
 
