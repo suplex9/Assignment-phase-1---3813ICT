@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { FormGroupName } from '@angular/forms';
-const backendURL = "localhost:3000/";
+const backendURL = 'http://localhost:3000/';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class UsersService {
 
   // get the user data
   getUser(username:string) {
-    return this.http.get('api/user', {
+    return this.http.get(backendURL+'api/user', {
       params: {
         username: username
       }
@@ -40,7 +40,7 @@ export class UsersService {
 
   // get the groups
   getGroups() {
-    return this.http.get('api/groups');
+    return this.http.get(backendURL+'api/groups');
   }
 
   // create a group
@@ -49,12 +49,12 @@ export class UsersService {
       'username': username,
       'groupName': groupName
     };
-    return this.http.post('api/createGroup', JSON.stringify(body), this.genHeadersJSON());
+    return this.http.post(backendURL+'api/createGroup', JSON.stringify(body), this.genHeadersJSON());
   }
 
   // remove a group
   removeGroup(groupName:string) {
-    return this.http.delete('api/removeGroup/' + groupName);
+    return this.http.delete(backendURL+'api/removeGroup/' + groupName);
   }
 
   // create a channel
