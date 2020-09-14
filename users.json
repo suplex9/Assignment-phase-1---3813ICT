@@ -34,7 +34,7 @@
     "email": "",
     "superAdmin": false,
     "groupAdmin": true,
-    "profileImage": "images/profile.gif",
+    "profileImage": "images/default/profile.gif",
     "groups": [
       {
         "name": "newbies",
