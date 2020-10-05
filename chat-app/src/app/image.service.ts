@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+const backendURL = 'http://localhost:3000/';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,6 @@ export class ImageService {
 
   upload(fd) {
     console.log('uploading service');
-    return this.http.post<any>('/api/image/upload', fd);
+    return this.http.post<any>(backendURL+'api/image/upload', fd);
   }
 }
